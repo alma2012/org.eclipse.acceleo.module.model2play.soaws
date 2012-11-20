@@ -7,6 +7,10 @@
 
 [comment : Variables "globales"/]
 
+[query public get_api_path() : String = 
+'/api/'
+/]
+
 [query public get_webservice_suffix() : String =
 'WS'
 /]
@@ -44,8 +48,12 @@ aParameter.eContainer(Operation).get_operation_interface().get_managed_entity_na
 	anOperation.input->select(not is_managed_entity())
 /]
 
+[query public is_required( aParameter : Parameter ) : Boolean =
+aParameter.lower.toString() <> '0'
+/]
+
 [query public get_required_parameters_except_entity( anOperation : Operation ) : OrderedSet(Parameter) =
-	get_input_parameters_except_entity()->select(lower.toString() <> '0')->asOrderedSet()
+	get_input_parameters_except_entity()->select(is_required())->asOrderedSet()
 /]
 
 [query public get_operation_interface( anOperation : Operation ) : Interface = 

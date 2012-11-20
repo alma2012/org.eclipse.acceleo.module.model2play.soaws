@@ -4,6 +4,7 @@
  */]
 [module testingTemplateInterface('http://www.obeonetwork.org/dsl/soa/2.0.0')]
 [import org::eclipse::acceleo::module::model2play::soaws::requests::requests/]
+[import org::eclipse::acceleo::module::model2play::soaws::common::operationTestForm/]
 
 
 [**
@@ -56,12 +57,8 @@
 </script>
 
 [for(anInterface.ownedOperations)]
-
 <!-- Operation [name/] -->
-
-
-
-
+[generateTestForm()/]
 
 [/for]
 

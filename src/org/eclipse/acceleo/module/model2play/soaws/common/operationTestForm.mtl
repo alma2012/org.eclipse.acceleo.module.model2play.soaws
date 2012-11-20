@@ -1,0 +1,66 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module generate.
+ */]
+[module operationTestForm('http://www.obeonetwork.org/dsl/soa/2.0.0','http://www.obeonetwork.org/dsl/entity/2.0.0')]
+
+[import org::eclipse::acceleo::module::model2play::soaws::requests::requests/]
+[import org::eclipse::acceleo::module::model2play::soaws::services::soa_services/]
+
+[template public id_field( any : OclAny )]
+<label for="id">ID (Required) : </label><input class="id" type="text" >
+<br>
+[/template]
+
+[template public input_fields( anOperation : Operation )]
+[for(anOperation.get_input_parameters_except_entity())]
+<label for="[name/]">[name.toUpperFirst()/] [if(is_required())](Required)[/if] : </label><input class="[name/]" type="text" >
+<br>
+[/for]
+[/template]
+
+[template public generate_constructor_fields(anOperation : Operation)]
+[input_fields()/]
+
+[/template]
+
+[template public generate_destructor_fields(anOperation : Operation)]
+[id_field()/]
+[input_fields()/]
+[/template]
+
+[template public generate_setter_fields(anOperation : Operation)]
+[id_field()/]
+[input_fields()/]
+[/template]
+
+[template public generate_getter_fields(anOperation : Operation)]
+[id_field()/]
+[/template]
+
+[comment
+ * The documentation of the template generateWebServices.
+ * @param anOperation
+ */]
+[template public generateTestForm(anOperation : Operation)]
+
+<h3>[name/]</h3>
+<form id="[name/]" method="[get_operation_protocol()/]" action="[get_api_path()+get_managed_entity_name()/]">	
+[comment Find an alteranive for ifelseifelseif.../]
+[if(get_operation_type() = 'constructor')]
+	[generate_constructor_fields()/]
+[elseif(get_operation_type() = 'destructor')]
+	[generate_destructor_fields()/]
+[elseif(get_operation_type() = 'setter')]
+	[generate_setter_fields()/]
+[elseif(get_operation_type() = 'getter')]
+	[generate_getter_fields()/]
+[/if]
+
+	<input class="send" type="button" value="Ok">
+	<br>
+	<textarea class="result" rows="7" cols="75"></textarea>
+	
+	</form>
+
+[/template]
