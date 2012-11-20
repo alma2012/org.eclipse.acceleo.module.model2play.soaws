@@ -5,7 +5,9 @@
 [module operationTestForm('http://www.obeonetwork.org/dsl/soa/2.0.0','http://www.obeonetwork.org/dsl/entity/2.0.0')]
 
 [import org::eclipse::acceleo::module::model2play::soaws::requests::requests/]
-[import org::eclipse::acceleo::module::model2play::soaws::services::soa_services/]
+[import org::eclipse::acceleo::module::model2play::soa::requests::requests/]
+
+[import org::eclipse::acceleo::module::model2play::soaws::services::soaws_services/]
 
 [template public id_field( any : OclAny )]
 <label for="id">ID (Required) : </label><input class="id" type="text" >

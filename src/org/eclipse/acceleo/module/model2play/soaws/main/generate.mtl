@@ -8,6 +8,7 @@
 [import org::eclipse::acceleo::module::model2play::soaws::files::controllerInterface]
 [import org::eclipse::acceleo::module::model2play::soaws::files::testingTemplateInterface]
 [import org::eclipse::acceleo::module::model2play::soaws::requests::requests]
+[import org::eclipse::acceleo::module::model2play::soa::requests::requests]
 
 
 [**

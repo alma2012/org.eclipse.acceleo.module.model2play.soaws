@@ -4,6 +4,7 @@
  */]
 [module operationMethod('http://www.obeonetwork.org/dsl/soa/2.0.0','http://www.obeonetwork.org/dsl/entity/2.0.0')]
 
+[import org::eclipse::acceleo::module::model2play::soa::requests::requests/]
 [import org::eclipse::acceleo::module::model2play::soaws::requests::requests/]
 [import org::eclipse::acceleo::module::model2play::soa::common::signatureOperation/]
 

@@ -5,6 +5,7 @@
 
 [module requests('http://www.obeonetwork.org/dsl/soa/2.0.0','http://www.obeonetwork.org/dsl/entity/2.0.0','http://www.obeonetwork.org/dsl/environment/2.0.0')]
 
+[import org::eclipse::acceleo::module::model2play::soa::requests::requests/]
 [comment : Variables "globales"/]
 
 [query public get_api_path() : String = 
@@ -28,9 +29,6 @@
 'WSUtils'
 /]
 
-[query public get_operation_type( anOperation : Operation ) : String =
-anOperation.getAnnotation('entity_manager')._body
-/]
 
 
 [query public get_managed_input( anOperation : Operation ) : Parameter =
@@ -60,27 +58,7 @@ aParameter.lower.toString() <> '0'
 	anOperation.eContainer(Interface)
 /]
 
-[query public get_managed_entity_name( iface : Interface ) : String = 
-iface.getAnnotation('entity_manager')._body
-/] 
 
-[query public get_managed_entity_name( anOperation : Operation ) : String = 
-anOperation.eContainer(Interface).get_managed_entity_name()
-/] 
-
-[query public is_entity_manager_interface( iface : Interface ) : Boolean = 
-not getAnnotation(iface,'entity_manager')->isEmpty()
-/] 
-
-[query public getAnnotation(object : ObeoDSMObject, key : String) : Annotation =
-object.metadatas.metadatas->filter(Annotation)->select(title = key)->first()
-/]
 
 [comment : Conventions de nommage /]
-[query public get_implementation_name( aService : Service ) : String = 
-aService.name + 'Impl'
-/]
 
-[query public apply_operation_template( anOperation : Operation ) : OclAny =
-invoke('org.eclipse.acceleo.module.model2play.soaws.common.operationMethod','generate_for_'+anOperation.getAnnotation('entity_manager')._body, Sequence{anOperation} )
-/]
