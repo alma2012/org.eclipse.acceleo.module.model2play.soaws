@@ -1,0 +1,27 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module generate.
+ */]
+[module generate('http://www.obeonetwork.org/dsl/soa/2.0.0')]
+
+
+[import org::eclipse::acceleo::module::model2play::soaws::files::controllerInterface]
+[import org::eclipse::acceleo::module::model2play::soaws::files::testingTemplateInterface]
+[import org::eclipse::acceleo::module::model2play::soaws::requests::requests]
+
+
+[**
+ * The documentation of the template generateWebServices.
+ * @param aSystem
+ */]
+[template public generateWebServices(aSystem : System)]
+[comment @main/]
+
+[for( iface : Interface | aSystem.ownedComponents.ownedServices.ownedInterface)]
+[if(is_entity_manager_interface(iface))]
+[generateController()/]
+[generateTemplate()/]
+[/if]
+[/for]
+
+[/template]

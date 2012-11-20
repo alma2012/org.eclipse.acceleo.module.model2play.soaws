@@ -1,0 +1,105 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module generate.
+ */]
+[module operationMethod('http://www.obeonetwork.org/dsl/soa/2.0.0','http://www.obeonetwork.org/dsl/entity/2.0.0')]
+
+[import org::eclipse::acceleo::module::model2play::soaws::requests::requests/]
+[import org::eclipse::acceleo::module::model2play::soa::common::signatureOperation/]
+
+
+[template public method_call( anOperation : Operation )]
+[anOperation.name/]([for( p : Parameter | anOperation.input)][name/][if (self <> anOperation.input->last())],[/if][/for])
+[/template]
+
+[template public find_by_id( anOperation : Operation )]
+[get_managed_entity_name()/] [get_managed_input().name/] = [get_managed_entity_name()/].find.byId([get_managed_input().name/]_id);
+[/template] 
+
+[template public input_parameter( aParameter : Parameter )]
+ Long [name/]_id 
+[/template] 
+
+[template public method_signature( anOperation : Operation )]
+public static Result [anOperation.name/]_WS([get_managed_input().input_parameter()/])
+[/template]
+
+[template public get_input_data(anOperation : Operation )]
+if ( ![get_wsutils_class()/].check_post_data(String['['/][']'/]{[for(get_required_parameters_except_entity())]"[name/]"[if (self <> anOperation.get_required_parameters_except_entity()->last())],[/if][/for]}) ) {
+	[return_bad('Bad arguments')/]
+}
+
+[for(get_input_parameters_except_entity())]
+[type.name/] [name/] = [get_wsutils_class()/].get_post_data("[name/]");  
+[/for]
+[/template]
+
+[template public check_entity_found(anOperation : Operation)]
+if ( [get_managed_input().name/] == null ) {
+	[return_bad('Required entity not found')/]
+}
+[/template]
+
+
+[template public return_bad(anOperation : Operation, message : String)]
+	return [get_wsutils_class()/].bad_request_json("[message/]");
+[/template]
+
+[template public return_ok(anOperation : Operation)]
+ObjectNode result = Json.newObject();
+[if not(anOperation.output->isEmpty())]
+result.put("[anOperation.output.name/]", Json.toJson([anOperation.output.name/]));
+[/if]
+
+return [get_wsutils_class()/].ok_request_json( result );
+[/template]
+
+
+[comment Operations/]
+
+[template public generate_constructor_operation(anOperation : Operation)]
+[get_input_data()/]
+
+[/template]
+
+[template public generate_destructor_operation(anOperation : Operation)]
+[find_by_id()/]
+[check_entity_found()/]
+[/template]
+
+[template public generate_setter_operation(anOperation : Operation)]
+[find_by_id()/]
+[check_entity_found()/]
+[get_input_data()/]
+[/template]
+
+[template public generate_getter_operation(anOperation : Operation)]
+[find_by_id()/]
+[check_entity_found()/]
+[/template]
+
+[**
+ * The documentation of the template generateWebServices.
+ * @param anOperation
+ */]
+[template public generateMethod(anOperation : Operation)]
+[method_signature()/] {
+	
+[comment Find an alteranive for ifelseifelseif.../]
+[if(get_operation_type() = 'constructor')]
+	[generate_constructor_operation()/]
+[elseif(get_operation_type() = 'destructor')]
+	[generate_destructor_operation()/]
+[elseif(get_operation_type() = 'setter')]
+	[generate_setter_operation()/]
+[elseif(get_operation_type() = 'getter')]
+	[generate_getter_operation()/]
+[/if]
+
+	[if not(anOperation.output->isEmpty())][get_managed_entity_name()/] [anOperation.output.name/] =[/if] [method_call()/];
+
+	[return_ok()/]
+
+}
+
+[/template]

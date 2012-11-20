@@ -1,0 +1,38 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module generate.
+ */]
+[module controllerInterface('http://www.obeonetwork.org/dsl/soa/2.0.0')]
+[import org::eclipse::acceleo::module::model2play::soaws::requests::requests/]
+[import org::eclipse::acceleo::module::model2play::soaws::common::operationMethod/]
+
+
+[**
+ * The documentation of the template generateWebServices.
+ * @param aSystem
+ */]
+[template public generateController(anInterface : Interface)]
+
+[file (anInterface.name+'WS'+'.java', false, 'UTF-8')]
+
+package [get_soaws_package()/];
+
+import models.*;
+
+
+import java.util.Map;
+import org.codehaus.jackson.node.ObjectNode;
+
+import play.libs.Json;
+import play.mvc.Controller;
+import play.mvc.Result;
+
+public class [anInterface.name+'WS'/] extends Controller {
+
+[for (anInterface.ownedOperations)]
+[generateMethod()/]
+[/for]
+};
+
+[/file]
+[/template]
