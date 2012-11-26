@@ -13,7 +13,7 @@
  */]
 [template public generateController(anInterface : Interface)]
 
-[file (anInterface.name+'WS'+'.java', false, 'UTF-8')]
+[file (get_soaws_folder() + get_webservice_name() +'.java', false, 'UTF-8')]
 
 package [get_soaws_package()/];
 
@@ -27,12 +27,18 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
-public class [anInterface.name+'WS'/] extends Controller {
+public class [get_webservice_name()/] extends Controller {
 
 [for (anInterface.ownedOperations)]
 [generateMethod()/]
 [/for]
-};
+
+	public static Result tests() {
+
+		return ok( [get_test_template_package()/].[name/]_tests.render() );
+
+	}
+}
 
 [/file]
 [/template]

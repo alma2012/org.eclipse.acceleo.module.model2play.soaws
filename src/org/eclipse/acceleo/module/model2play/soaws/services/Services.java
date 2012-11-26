@@ -37,4 +37,21 @@ public class Services {
 		
 	}
 	
+	public String entityNameToVarName( String entity_name ) {
+		
+		String var_name = entity_name;
+		
+		String str = "";
+		
+		for ( int i=1; i<var_name.length(); i++  ) {
+			
+			//if ( entity_name. )
+				//CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, "SomeInput");
+		}
+		
+		
+		return var_name;
+		
+	}
+	
 };

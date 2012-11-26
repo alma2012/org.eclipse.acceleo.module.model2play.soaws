@@ -7,9 +7,12 @@
 
 [import org::eclipse::acceleo::module::model2play::soaws::files::controllerInterface]
 [import org::eclipse::acceleo::module::model2play::soaws::files::testingTemplateInterface]
+[import org::eclipse::acceleo::module::model2play::soaws::files::routesTestSystem]
+
 [import org::eclipse::acceleo::module::model2play::soaws::requests::requests]
 [import org::eclipse::acceleo::module::model2play::soa::requests::requests]
 
+[import org::eclipse::acceleo::module::model2play::soaws::files::staticWsUtilsFile]
 
 [**
  * The documentation of the template generateWebServices.
@@ -25,4 +28,7 @@
 [/if]
 [/for]
 
+[aSystem.generateRoutesFile()/]
+
+[generateWsUtils()/]
 [/template]

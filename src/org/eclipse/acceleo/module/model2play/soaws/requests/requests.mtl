@@ -8,27 +8,37 @@
 [import org::eclipse::acceleo::module::model2play::soa::requests::requests/]
 [comment : Variables "globales"/]
 
-[query public get_api_path() : String = 
+[query public get_api_path( any : OclAny ) : String = 
 '/api/'
 /]
 
-[query public get_webservice_suffix() : String =
+[query public get_webservice_suffix( any : OclAny ) : String =
 'WS'
 /]
 
-[query public get_soaws_folder() : String =
-'app/controllers/rest'
+[query public get_soaws_folder( any : OclAny ) : String =
+'app/controllers/rest/'
 /]
 
-
-[query public get_soaws_package() : String =
+[query public get_soaws_package( any : OclAny ) : String =
 'controllers.rest'
 /]
 
-[query public get_wsutils_class() : String =
+[query public get_wsutils_class( any : OclAny ) : String =
 'WSUtils'
 /]
 
+[query public get_test_templates_folder( any : OclAny ) : String =
+'app/views/rest_tests/'
+/]
+
+[query public get_test_template_package( any : OclAny ) : String =
+'views.html.rest_tests'
+/]
+
+[query public get_test_template_filename( anInterface : Interface ) : String =
+name + '_tests' + '.scala.html'
+/]
 
 
 [query public get_managed_input( anOperation : Operation ) : Parameter =
@@ -58,7 +68,13 @@ aParameter.lower.toString() <> '0'
 	anOperation.eContainer(Interface)
 /]
 
+[query public get_webservice_name( anInterface : Interface ) : String =
+	anInterface.name + get_webservice_suffix()
+/]
 
+[query public get_webservice_name( anOperation : Operation ) : String =
+	get_operation_interface().get_webservice_name()
+/]
 
 [comment : Conventions de nommage /]
 

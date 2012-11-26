@@ -10,7 +10,7 @@
 
 
 [template public method_call( anOperation : Operation )]
-[anOperation.name/]([for( p : Parameter | anOperation.input)][name/][if (self <> anOperation.input->last())],[/if][/for])
+Service.[anOperation.name/]([for( p : Parameter | anOperation.input)][name/][if (self <> anOperation.input->last())],[/if][/for])
 [/template]
 
 [template public find_by_id( anOperation : Operation )]
@@ -26,7 +26,7 @@ public static Result [anOperation.name/]_WS([get_managed_input().input_parameter
 [/template]
 
 [template public get_input_data(anOperation : Operation )]
-if ( ![get_wsutils_class()/].check_post_data(String['['/][']'/]{[for(get_required_parameters_except_entity())]"[name/]"[if (self <> anOperation.get_required_parameters_except_entity()->last())],[/if][/for]}) ) {
+if ( ![get_wsutils_class()/].check_post_data( new String['['/][']'/]{[for(get_required_parameters_except_entity())]"[name/]"[if (self <> anOperation.get_required_parameters_except_entity()->last())],[/if][/for]}) ) {
 	[return_bad('Bad arguments')/]
 }
 
