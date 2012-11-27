@@ -45,6 +45,14 @@ name + '_tests' + '.scala.html'
 anOperation.input->select(is_managed_entity())->first()
 /]
 
+[query public get_managed_input_id( anOperation : Operation ) : String =
+ if not( get_managed_input()->isEmpty() ) then get_managed_input().name + '_id' else '' endif
+/]
+
+[query public get_managed_input_id_decl( anOperation : Operation ) : String =
+ if ( get_managed_input_id().size() > 0 ) then 'Long ' + get_managed_input_id() else '' endif
+/]
+
 [query public is_managed_entity( aParameter : Parameter ) : Boolean =
 aParameter.eContainer(Operation).get_operation_interface().get_managed_entity_name().equalsIgnoreCase( 
 	aParameter.type.name

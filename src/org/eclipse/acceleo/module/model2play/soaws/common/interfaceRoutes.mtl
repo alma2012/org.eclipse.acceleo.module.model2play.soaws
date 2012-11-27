@@ -16,7 +16,7 @@
  */]
 [template public generateRoutes(anInterface : Interface)]
 
-// For interface [name/]
+# For interface [name/]
 [for(anInterface.ownedOperations)]
 [comment Find an alteranive for ifelseifelseif.../]
 [if(get_operation_type() = 'constructor')]

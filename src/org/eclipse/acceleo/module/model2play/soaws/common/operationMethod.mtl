@@ -10,19 +10,15 @@
 
 
 [template public method_call( anOperation : Operation )]
-Service.[anOperation.name/]([for( p : Parameter | anOperation.input)][name/][if (self <> anOperation.input->last())],[/if][/for])
+[get_services_class()/].get[get_service_name()/]().[anOperation.name/]([for( p : Parameter | anOperation.input)][name/][if (self <> anOperation.input->last())],[/if][/for])
 [/template]
 
 [template public find_by_id( anOperation : Operation )]
 [get_managed_entity_name()/] [get_managed_input().name/] = [get_managed_entity_name()/].find.byId([get_managed_input().name/]_id);
 [/template] 
 
-[template public input_parameter( aParameter : Parameter )]
- Long [name/]_id 
-[/template] 
-
 [template public method_signature( anOperation : Operation )]
-public static Result [anOperation.name/]_WS([get_managed_input().input_parameter()/])
+public static Result [anOperation.name/]([get_managed_input_id_decl()/])
 [/template]
 
 [template public get_input_data(anOperation : Operation )]

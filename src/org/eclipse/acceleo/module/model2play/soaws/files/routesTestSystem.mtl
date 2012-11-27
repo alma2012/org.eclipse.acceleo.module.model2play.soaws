@@ -16,13 +16,13 @@
 [template public generateRoutesFile(aSystem : System)]
 [file ('conf/routes', true, 'UTF-8')]
 
-// Here routes for [aSystem.name/]
+# Here routes for [aSystem.name/]
 
 [for(aSystem.ownedComponents.ownedServices.ownedInterface)]
 [if(is_entity_manager_interface())]
 [generateRoutes()/]
 
-// For tests
+# For tests
 GET	[get_api_path()/]tests/[get_managed_entity_name().toLower()/]	[get_soaws_package()/].[get_webservice_name()/].tests()
 [/if]
 
@@ -30,7 +30,7 @@ GET	[get_api_path()/]tests/[get_managed_entity_name().toLower()/]	[get_soaws_pac
 
 
 
-// End routes for [aSystem.name/]
+# End routes for [aSystem.name/]
 [/file]
 
 [/template]
