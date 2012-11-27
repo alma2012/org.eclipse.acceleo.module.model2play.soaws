@@ -47,7 +47,7 @@
 [template public generateTestForm(anOperation : Operation)]
 
 <h3>[name/]</h3>
-<form id="[name/]" method="[get_operation_protocol()/]" action="[get_api_path()+get_managed_entity_name()/]">	
+<form id="[name/]" method="[get_operation_protocol()/]" action="[get_api_path()+get_managed_entity_name().toLower()/]">	
 [comment Find an alteranive for ifelseifelseif.../]
 [if(get_operation_type() = 'constructor')]
 	[generate_constructor_fields()/]
