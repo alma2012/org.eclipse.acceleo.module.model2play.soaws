@@ -2,6 +2,7 @@
 
 [import org::eclipse::acceleo::module::model2play::soaws::requests::requests/]
 
+[import org::eclipse::acceleo::module::model2play::soaws::services::soaws_services/]
 
 [template public generateWsUtils( any : OclAny )]
 [file (get_soaws_folder() + 'WSUtils.java', false, 'UTF-8')]
@@ -64,6 +65,25 @@ public class WSUtils extends Controller {
 
 		return null;
 	}
+
+
+
+	[for( str : String | get_default_datatypes())]
+	public static [str/] get_post_data_as[str/]( String key ) {
+
+		String str = get_post_data(key);
+		
+		if ( str != null ) {
+			return [str/].parse[if(str <> 'Integer')][str/][else]['Int'/][/if](str);
+		}
+		else {
+			return null;
+		}
+
+	}
+	[/for]
+
+
 
 
 }

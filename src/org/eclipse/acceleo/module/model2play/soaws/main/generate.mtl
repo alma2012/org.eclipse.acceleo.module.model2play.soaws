@@ -13,6 +13,7 @@
 [import org::eclipse::acceleo::module::model2play::soa::requests::requests]
 
 [import org::eclipse::acceleo::module::model2play::soaws::files::staticWsUtilsFile]
+[import org::eclipse::acceleo::module::model2play::soaws::files::staticJsAjaxFile]
 
 [**
  * The documentation of the template generateWebServices.
@@ -31,4 +32,5 @@
 [aSystem.generateRoutesFile()/]
 
 [generateWsUtils()/]
+[generateJsAjax()/]
 [/template]

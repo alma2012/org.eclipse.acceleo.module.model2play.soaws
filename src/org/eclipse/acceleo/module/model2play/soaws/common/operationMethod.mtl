@@ -6,6 +6,8 @@
 
 [import org::eclipse::acceleo::module::model2play::soa::requests::requests/]
 [import org::eclipse::acceleo::module::model2play::soaws::requests::requests/]
+[import org::eclipse::acceleo::module::model2play::soaws::services::soaws_services/]
+
 [import org::eclipse::acceleo::module::model2play::soa::common::signatureOperation/]
 
 
@@ -27,7 +29,12 @@ if ( ![get_wsutils_class()/].check_post_data( new String['['/][']'/]{[for(get_re
 }
 
 [for(get_input_parameters_except_entity())]
-[type.name/] [name/] = [get_wsutils_class()/].get_post_data("[name/]");  
+[if(is_default_datatype() or type.name = 'String')]
+[type.name/] [name/] = [get_wsutils_class()/].get_post_data[if(is_default_datatype())]_as[type.name/][/if]("[name/]");
+[else] [comment In this cas, its an entity, so lets find from id /]
+Long [name/]_id = [get_wsutils_class()/].get_post_data_asLong("[name/]");
+[type.name/] [name/] = [type.name/].find.byId([name/]_id);
+[/if]  
 [/for]
 [/template]
 

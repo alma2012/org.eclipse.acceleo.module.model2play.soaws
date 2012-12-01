@@ -8,3 +8,9 @@
 
 [query public get_operation_protocol( anOperation : Operation ) : String =
 	invoke('org.eclipse.acceleo.module.model2play.soaws.services.Services', 'get_protocol_method(java.lang.String)', Sequence{ anOperation.get_operation_type() }) /]
+
+[query public is_default_datatype( aParameter : Parameter ) : Boolean =
+	invoke('org.eclipse.acceleo.module.model2play.soaws.services.Services', 'is_default_datatype(java.lang.String)', Sequence{ aParameter.type.name }) /]
+
+[query public get_default_datatypes( nothing : OclAny ) : Set(String) =
+	invoke('org.eclipse.acceleo.module.model2play.soaws.services.Services', 'get_default_datatypes()', Sequence{}) /]

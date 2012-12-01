@@ -2,6 +2,9 @@ package org.eclipse.acceleo.module.model2play.soaws.services;
 
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.eclipse.emf.ecore.EObject;
@@ -13,17 +16,28 @@ public class Services {
 	
 	public final String DEFAULT_PROTOCOL = "GET";
 
-	HashMap<String,String> _protocols = new HashMap<String, String>() {/**
+	Map<String,String> _protocols = new HashMap<String, String>() {/**
 		 * 
 		 */
 		private static final long serialVersionUID = -7504100133787271366L;
 
-	{
+		{
 		   put("constructor", "POST");
 		   put("destructor", "DELETE");
 		   put("setter", "PUT");
 		   put("getter","GET");
 		}};
+		
+	Set<String> _datatypes = new HashSet<String>() {
+		
+		{
+			add("Double");
+			add("Long");
+			add("Float");
+			add("Integer");
+		}
+		
+	};
 
 	
 	public String get_protocol_method( String operation_type ) {
@@ -37,6 +51,16 @@ public class Services {
 		
 	}
 	
+	public boolean is_default_datatype( String typename ) {
+		
+		return _datatypes.contains(typename);
+		
+	}
+	
+	public Set<String> get_default_datatypes() {
+		return _datatypes;
+	}
+	/* Unused */
 	public String entityNameToVarName( String entity_name ) {
 		
 		String var_name = entity_name;
