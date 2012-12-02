@@ -22,13 +22,14 @@
 [if(is_entity_manager_interface())]
 [generateRoutes()/]
 
+[if not(includes_method_of_type('getter'))]
+[generateDefaultGetterRoute()/]
+[/if]
 # For tests
 GET	[get_api_path()/]tests/[get_managed_entity_name().toLower()/]	[get_soaws_package()/].[get_webservice_name()/].tests()
 [/if]
 
 [/for]
-
-
 
 # End routes for [aSystem.name/]
 [/file]

@@ -84,5 +84,10 @@ aParameter.lower.toString() <> '0'
 	get_operation_interface().get_webservice_name()
 /]
 
+
+[query public includes_method_of_type( anInterface : Interface, type : String ) : Boolean =
+anInterface.ownedOperations->exists(get_operation_type() = type)
+/]
+
 [comment : Conventions de nommage /]
 

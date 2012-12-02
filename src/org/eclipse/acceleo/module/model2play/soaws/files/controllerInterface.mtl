@@ -37,6 +37,10 @@ public class [get_webservice_name()/] extends Controller {
 [generateMethod()/]
 [/for]
 
+[if not(includes_method_of_type('getter'))]
+[generateDefaultGetter()/]
+[/if]
+
 	public static Result tests() {
 
 		return ok( [get_test_template_package()/].[name/]_tests.render() );

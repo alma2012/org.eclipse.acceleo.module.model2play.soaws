@@ -59,10 +59,26 @@
 	[generate_getter_fields()/]
 [/if]
 
+	[common_form_end()/]
+
+	</form>
+
+[/template]
+
+[template public common_form_end( nothing : OclAny )]
+
 	<input class="send" type="button" value="Ok">
 	<br>
 	<textarea class="result" rows="7" cols="75"></textarea>
 	
-	</form>
+[/template]
+
+[template public generateDefaultGetterTestForm( anInterface : Interface ) ]
+	
+<h3>get_[get_managed_entity_name().toLower()/]</h3>
+<form id="[name/]" method="GET" action="[get_api_path()+get_managed_entity_name().toLower()/]">	
+[id_field()/]
+[common_form_end()/]
+</form>
 
 [/template]

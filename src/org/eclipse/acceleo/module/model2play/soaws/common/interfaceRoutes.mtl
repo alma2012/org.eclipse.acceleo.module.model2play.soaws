@@ -31,5 +31,8 @@ GET [get_api_path()/][get_managed_entity_name().toLower()/]/:[get_managed_entity
 
 [/for]
 
+[/template]
 
+[template public generateDefaultGetterRoute( anInterface : Interface )]
+GET [get_api_path()/][get_managed_entity_name().toLower()/]/:[get_managed_entity_name().toLower()/]_id	[get_soaws_package()/].[get_webservice_name()/].get[get_managed_entity_name()/]([get_managed_entity_name().toLower()/]_id : Long)
 [/template]

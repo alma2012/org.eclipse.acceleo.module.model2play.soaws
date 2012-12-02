@@ -45,7 +45,7 @@ if ( [get_managed_input().name/] == null ) {
 [/template]
 
 
-[template public return_bad(anOperation : Operation, message : String)]
+[template public return_bad(message : String)]
 	return [get_wsutils_class()/].bad_request_json("[message/]");
 [/template]
 
@@ -105,5 +105,24 @@ return [get_wsutils_class()/].ok_request_json( result );
 	[return_ok()/]
 
 }
+
+[/template]
+
+
+[template public generateDefaultGetter(anInterface : Interface) ]
+public static Result get[get_managed_entity_name()/]( Long [get_managed_entity_name().toLower()/]_id ) {
+
+	[get_managed_entity_name()/] [get_managed_entity_name().toLower()/] = [get_managed_entity_name()/].find.byId([get_managed_entity_name().toLower()/]_id);
+
+	if ( [get_managed_entity_name().toLower()/] == null ) {
+		[return_bad('Not found')/]
+	}
+
+	ObjectNode result = Json.newObject();
+	result.put("[get_managed_entity_name().toLower()/]", Json.toJson([get_managed_entity_name().toLower()/]));
+
+	return [get_wsutils_class()/].ok_request_json( result );
+}
+
 
 [/template]
