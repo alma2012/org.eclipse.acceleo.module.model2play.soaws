@@ -22,6 +22,12 @@ import play.mvc.Result;
 
 public class WSUtils extends Controller {
 
+	public static Result tests_index() {
+	
+		return ok(views.html.rest_tests.tests_index.render());
+
+	}
+
 	public static Result bad_request_json( String error_message ) {
 
 		ObjectNode result = Json.newObject();

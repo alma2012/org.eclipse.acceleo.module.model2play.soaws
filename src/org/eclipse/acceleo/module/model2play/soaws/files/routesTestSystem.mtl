@@ -16,6 +16,8 @@
 [template public generateRoutesFile(aSystem : System)]
 [file ('conf/routes', true, 'UTF-8')]
 
+GET [get_api_path()/]tests		[get_soaws_package()/].[get_wsutils_class()/].tests_index()
+
 # Here routes for [aSystem.name/]
 
 [for(aSystem.ownedComponents.ownedServices.ownedInterface)]

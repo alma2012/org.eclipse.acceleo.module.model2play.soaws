@@ -7,6 +7,7 @@
 
 [import org::eclipse::acceleo::module::model2play::soaws::files::controllerInterface]
 [import org::eclipse::acceleo::module::model2play::soaws::files::testingTemplateInterface]
+[import org::eclipse::acceleo::module::model2play::soaws::files::testingTemplateIndex]
 [import org::eclipse::acceleo::module::model2play::soaws::files::routesTestSystem]
 
 [import org::eclipse::acceleo::module::model2play::soaws::requests::requests]
@@ -33,4 +34,5 @@
 
 [generateWsUtils()/]
 [generateJsAjax()/]
+[generateTemplateIndex()/]
 [/template]
