@@ -24,10 +24,6 @@
 'controllers.rest'
 /]
 
-[query public get_wsutils_class( any : OclAny ) : String =
-'WSUtils'
-/]
-
 [query public get_test_templates_folder( any : OclAny ) : String =
 'app/views/rest_tests/'
 /]

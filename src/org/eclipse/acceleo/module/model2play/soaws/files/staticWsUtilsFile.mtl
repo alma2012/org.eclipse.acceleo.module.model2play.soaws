@@ -2,7 +2,7 @@
 
 [import org::eclipse::acceleo::module::model2play::soaws::requests::requests/]
 
-[import org::eclipse::acceleo::module::model2play::soaws::services::soaws_services/]
+[import org::eclipse::acceleo::module::model2play::soa::services::soa_services/]
 
 [template public generateWsUtils( any : OclAny )]
 [file (get_soaws_folder() + 'WSUtils.java', false, 'UTF-8')]

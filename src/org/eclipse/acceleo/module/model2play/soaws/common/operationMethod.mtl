@@ -6,14 +6,10 @@
 
 [import org::eclipse::acceleo::module::model2play::soa::requests::requests/]
 [import org::eclipse::acceleo::module::model2play::soaws::requests::requests/]
-[import org::eclipse::acceleo::module::model2play::soaws::services::soaws_services/]
+[import org::eclipse::acceleo::module::model2play::soa::services::soa_services/]
 
 [import org::eclipse::acceleo::module::model2play::soa::common::signatureOperation/]
 
-
-[template public method_call( anOperation : Operation )]
-[get_services_class()/].get[get_service_name()/]().[anOperation.name/]([for( p : Parameter | anOperation.input)][name/][if (self <> anOperation.input->last())],[/if][/for])
-[/template]
 
 [template public find_by_id( anOperation : Operation )]
 [get_managed_entity_name()/] [get_managed_input().name/] = [get_managed_entity_name()/].find.byId([get_managed_input().name/]_id);
@@ -30,7 +26,8 @@ if ( ![get_wsutils_class()/].check_post_data( new String['['/][']'/]{[for(get_re
 
 [for(get_input_parameters_except_entity())]
 [if(is_default_datatype() or type.name = 'String')]
-[type.name/] [name/] = [get_wsutils_class()/].get_post_data[if(is_default_datatype())]_as[type.name/][/if]("[name/]");
+//[type.name/] [name/] = [get_wsutils_class()/].get_post_data[if(is_default_datatype())]_as[type.name/][/if]("[name/]");
+[get_parameter_from_post()/]
 [else] [comment In this cas, its an entity, so lets find from id /]
 Long [name/]_id = [get_wsutils_class()/].get_post_data_asLong("[name/]");
 [type.name/] [name/] = [type.name/].find.byId([name/]_id);
@@ -100,7 +97,7 @@ return [get_wsutils_class()/].ok_request_json( result );
 	[generate_getter_operation()/]
 [/if]
 
-	[if not(anOperation.output->isEmpty())][get_managed_entity_name()/] [anOperation.output.name/] =[/if] [method_call()/];
+	[if not(anOperation.output->isEmpty())][get_managed_entity_name()/] [anOperation.output.name/] =[/if] [service_method_call()/];
 
 	[return_ok()/]
 
