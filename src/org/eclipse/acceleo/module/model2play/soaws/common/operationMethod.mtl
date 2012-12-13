@@ -58,23 +58,23 @@ return [get_wsutils_class()/].ok_request_json( result );
 
 [comment Operations/]
 
-[template public generate_constructor_operation(anOperation : Operation)]
+[template public generate_WS_operation(anOperation : Operation) ? (get_operation_type() = 'constructor') ]
 [get_input_data()/]
 
 [/template]
 
-[template public generate_destructor_operation(anOperation : Operation)]
+[template public generate_WS_operation(anOperation : Operation) ? (get_operation_type() = 'destructor') ]
 [find_by_id()/]
 [check_entity_found()/]
 [/template]
 
-[template public generate_setter_operation(anOperation : Operation)]
+[template public generate_WS_operation(anOperation : Operation) ? (get_operation_type() = 'setter') ]
 [find_by_id()/]
 [check_entity_found()/]
 [get_input_data()/]
 [/template]
 
-[template public generate_getter_operation(anOperation : Operation)]
+[template public generate_WS_operation(anOperation : Operation) ? (get_operation_type() = 'getter') ]
 [find_by_id()/]
 [check_entity_found()/]
 [/template]
@@ -87,16 +87,7 @@ return [get_wsutils_class()/].ok_request_json( result );
 [method_signature()/] {
 	
 [comment Find an alteranive for ifelseifelseif.../]
-[if(get_operation_type() = 'constructor')]
-	[generate_constructor_operation()/]
-[elseif(get_operation_type() = 'destructor')]
-	[generate_destructor_operation()/]
-[elseif(get_operation_type() = 'setter')]
-	[generate_setter_operation()/]
-[elseif(get_operation_type() = 'getter')]
-	[generate_getter_operation()/]
-[/if]
-
+	[generate_WS_operation()/]
 	[if not(anOperation.output->isEmpty())][get_managed_entity_name()/] [anOperation.output.name/] =[/if] [service_method_call()/];
 
 	[return_ok()/]

@@ -7,7 +7,7 @@
 [import org::eclipse::acceleo::module::model2play::soaws::requests::requests/]
 [import org::eclipse::acceleo::module::model2play::soa::requests::requests/]
 
-[import org::eclipse::acceleo::module::model2play::soaws::services::soaws_services/]
+[import org::eclipse::acceleo::module::model2play::soa::services::soa_services/]
 
 [template public id_field( any : OclAny )]
 <label for="id">ID (Required) : </label><input class="id" type="text" >
@@ -21,22 +21,22 @@
 [/for]
 [/template]
 
-[template public generate_constructor_fields(anOperation : Operation)]
+[template public generate_form_fields(anOperation : Operation) ? (get_operation_type() = 'constructor') ]
 [input_fields()/]
 
 [/template]
 
-[template public generate_destructor_fields(anOperation : Operation)]
+[template public generate_form_fields(anOperation : Operation) ? (get_operation_type() = 'destructor') ]
 [id_field()/]
 [input_fields()/]
 [/template]
 
-[template public generate_setter_fields(anOperation : Operation)]
+[template public generate_form_fields(anOperation : Operation) ? (get_operation_type() = 'setter') ]
 [id_field()/]
 [input_fields()/]
 [/template]
 
-[template public generate_getter_fields(anOperation : Operation)]
+[template public generate_form_fields(anOperation : Operation) ? (get_operation_type() = 'getter') ]
 [id_field()/]
 [/template]
 
@@ -49,16 +49,7 @@
 <h3>[name/]</h3>
 <form id="[name/]" method="[get_operation_protocol()/]" action="[get_api_path()+get_managed_entity_name().toLower()/]">	
 [comment Find an alteranive for ifelseifelseif.../]
-[if(get_operation_type() = 'constructor')]
-	[generate_constructor_fields()/]
-[elseif(get_operation_type() = 'destructor')]
-	[generate_destructor_fields()/]
-[elseif(get_operation_type() = 'setter')]
-	[generate_setter_fields()/]
-[elseif(get_operation_type() = 'getter')]
-	[generate_getter_fields()/]
-[/if]
-
+	[generate_form_fields()/]
 	[common_form_end()/]
 
 	</form>

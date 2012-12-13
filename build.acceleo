@@ -18,7 +18,7 @@
         <acceleoCompiler 
             sourceFolder="${target.folder}"
             outputFolder="${target.folder}"
-            dependencies="${target.folder}/../../org.eclipse.acceleo.module.model2play.soa;"
+            dependencies="${target.folder}/../../org.eclipse.acceleo.module.model2play.soa;${target.folder}/../../org.eclipse.acceleo.module.model2play.entity;"
             binaryResource="false"
             packagesToRegister="">
         </acceleoCompiler>
