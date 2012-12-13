@@ -2,7 +2,7 @@
 [**
  * The documentation of the module generate.
  */]
-[module generate('http://www.obeonetwork.org/dsl/soa/2.0.0')]
+[module generateSOAWS('http://www.obeonetwork.org/dsl/soa/2.0.0')]
 
 
 [import org::eclipse::acceleo::module::model2play::soaws::files::controllerInterface]
